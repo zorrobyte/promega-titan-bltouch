@@ -8,7 +8,7 @@
 
 ; --- SECTION: GENERAL PREFERENCES ( ) ---
 
-M564 S1 H1 ; Enables Homing Requirement For Motor Activation and set axes limits
+;M564 S1 H1 ; Enables Homing Requirement For Motor Activation and set axes limits
 
 G29 S1 ; Load heightmap after power cycle
 
