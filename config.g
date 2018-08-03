@@ -19,7 +19,7 @@ M569 P0 S0 ; Drive 0 goes forwards, CoreXY_1
 M569 P1 S1 ; Drive 1 goes forwards, CoreXY_2
 M569 P2 S1 ; Drive 2 goes backwards, Z Motor --- MODIFIED FOR MY SETUP!
 M569 P3 S0 ; Drive 3 goes forwards, Left Extruder
-;M569 P4 S1 ; Drive 4 goes forwards, Right Extruder
+M569 P4 S0 ; Drive 4 goes forwards, Right Extruder
 
 M574 X2 Y2 S0 ; Set xy end-stops types (S0 is active low, applied to XY)
 
@@ -48,20 +48,20 @@ M557 X15:368 Y15:373 S20                           ; Define mesh grid
 M557 X0:340 Y35:380 S48                       ; Define heightmap mesh !!!!!
 M376 H25                                      ; Define height(mm) over which to taper off heightmap compensation !!!!!
 
-M906 X680 Y680 Z600 E700 I60; Set motor currents (mA) and idle current percentage
+M906 X680 Y680 Z600 E700:700 I60; Set motor currents (mA) and idle current percentage
 
-M201 X500 Y500 Z75 E250 ; Set accelerations (mm/s^2)
-M203 X4200 Y4200 Z2300 E5000 ; Set maximum linear speeds
-M566 X400 Y400 Z40 E300 ; Set maximum instantaneous speed changes (mm/min)
+M201 X500 Y500 Z75 E250:250 ; Set accelerations (mm/s^2)
+M203 X4200 Y4200 Z2300 E100:100 ; Set maximum linear speeds
+M566 X400 Y400 Z40 E300:300 ; Set maximum instantaneous speed changes (mm/min)
 
 M208 X0 Y0 Z-0.5 S1    ; Set axis minima
 M208 X383 Y388 Z377 S0 ; Set axis maxima
 
-M92 X79.8 Y79.8 Z850 ; Set axis steps/mm
+M92 X79.8 Y79.8 Z377 ; Set axis steps/mm
 M350 X32 Y32 Z16          ; Setting microstepping to 1/32.
 
-M92 E850 ; Extruder Steps/mm
-M350 E16    ; Setting microstepping to 1/128.
+M92 E837:837 ; Extruder Steps/mm
+M350 E16:16    ; Setting microstepping to 1/128.
 
 G21 ; Work in millimetres
 G90 ; Set to absolute coordinates...
@@ -89,7 +89,7 @@ M143 H1 S320 ; Set maximum heater temperature to 320C for hot end 1
 ; --- SECTION: FANS ( ) ---
 
 M106 P0 S0 I0 F4 H-1 L0.3 ; Set fan 0 value, PWM signal inversion and frequency. Thermostatic control is turned off, Minimum fan value 0.3, Speed 100%
-M106 P1 S0 I0 F4 H-1 L0.3 ; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned off, Minimum fan value 0.3, Speed 100%
+;M106 P1 S0 I0 F4 H-1 L0.3 ; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned off, Minimum fan value 0.3, Speed 100%
 ;M106 P2 S0 I0 F4 H-1 L0.3 ; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned off, Minimum fan value 0.3, Speed 100%
 
 ; --- SECTION: TOOLS ( ) ---
@@ -99,7 +99,7 @@ M106 P1 S0 I0 F4 H-1 L0.3 ; Set fan 1 value, PWM signal inversion and frequency.
 ; D1 is right extruder
 
 ; Mixing Tool T0
-M563 P0 D0 H1 F2 S"Aero" ; Define mixing tool
+M563 P0 D0 H1 F0 S"Aero" ; Define mixing tool
 G10 P0 X0 Y0 Z0 ; Set axis offsets
 G10 P0 R0 S0 ; Set active (S0) & standby temp (R0) at 0.
 ;M567 P0 E0.5:0.5 ; Set tool mix ratios for extruder
