@@ -64,7 +64,5 @@ G90
 ; Re-enable mesh leveling
 G29 S1
 
-M98 Pmachine_axisdimension.g ; Set Axes Limits
-
 ; Stop movement across limits, enable boundaries, homing requirement
 M564 H1 S1
