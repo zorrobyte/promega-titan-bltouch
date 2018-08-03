@@ -19,9 +19,10 @@ M569 P0 S0 ; Drive 0 goes forwards, CoreXY_1
 M569 P1 S1 ; Drive 1 goes forwards, CoreXY_2
 M569 P2 S1 ; Drive 2 goes backwards, Z Motor --- MODIFIED FOR MY SETUP!
 M569 P3 S0 ; Drive 3 goes forwards, Left Extruder
-M569 P4 S1 ; Drive 4 goes forwards, Right Extruder
+;M569 P4 S1 ; Drive 4 goes forwards, Right Extruder
 
 M574 X2 Y2 S0 ; Set xy end-stops types (S0 is active low, applied to XY)
+
 ; bltouch
 
 ; --- SECTION: Z-PROBE & MESH COMPENSATION ---
@@ -47,7 +48,7 @@ M557 X15:368 Y15:373 S20                           ; Define mesh grid
 M557 X0:340 Y35:380 S48                       ; Define heightmap mesh !!!!!
 M376 H25                                      ; Define height(mm) over which to taper off heightmap compensation !!!!!
 
-M906 X680 Y680 Z600 E350:350 I60; Set motor currents (mA) and idle current percentage
+M906 X680 Y680 Z600 E700:700 I60; Set motor currents (mA) and idle current percentage
 
 M201 X500 Y500 Z75 E250:250 ; Set accelerations (mm/s^2)
 M203 X4200 Y4200 Z2300 E5000:5000 ; Set maximum linear speeds
