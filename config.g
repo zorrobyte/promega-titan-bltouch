@@ -99,11 +99,12 @@ M106 P2 S0 I0 F4 H-1 L0.3 ; Set fan 1 value, PWM signal inversion and frequency.
 ; D1 is right extruder
 
 ; Mixing Tool T0
-M563 P0 D0:1 H2 F2 S"Mixing" ; Define mixing tool
+M563 P0 D0 H2 F2 S"Aero" ; Define mixing tool
 G10 P0 X0 Y0 Z0 ; Set axis offsets
 G10 P0 R0 S0 ; Set active (S0) & standby temp (R0) at 0.
 M567 P0 E0.5:0.5 ; Set tool mix ratios for extruder
-M568 P0 S1 ; Turn on tool mixing for the extruder
+;M568 P0 S1 ; Turn on tool mixing for the extruder
+M568 P1 S0 ; Turn off tool mixing
 
 ; Left Only T1
 M563 P1 D0 H2 F2 S"Mixing as Single Left" ; mixing nozzle only using left extruder motor
