@@ -10,6 +10,20 @@
 
 M564 S1 H1 ; Enables Homing Requirement For Motor Activation and set axes limits
 
+G29 S1 ; Load heightmap after power cycle
+
+; --- SECTION: DRIVES (MOVEMENT SECTION) & ENDSTOPS ---
+
+M667 S1  ; Enable coreXY mode
+M569 P0 S0 ; Drive 0 goes forwards, CoreXY_1
+M569 P1 S1 ; Drive 1 goes forwards, CoreXY_2
+M569 P2 S1 ; Drive 2 goes backwards, Z Motor --- MODIFIED FOR MY SETUP!
+M569 P3 S0 ; Drive 3 goes forwards, Left Extruder
+M569 P4 S1 ; Drive 4 goes forwards, Right Extruder
+
+M574 X2 Y2 S0 ; Set xy end-stops types (S0 is active low, applied to XY)
+; bltouch
+
 ; --- SECTION: Z-PROBE & MESH COMPENSATION ---
 ; Determine the Probe Z Offset:
 ;  1. Heat the bed to 60C and the nozzle to 150C
@@ -24,31 +38,14 @@ M564 S1 H1 ; Enables Homing Requirement For Motor Activation and set axes limits
 ;  9. Get the Z Probe value with G30 S-1
 ; 10. Note the Z value in the Web UI and update it in the G31 Z parameter below
 ; 11. Put the Z probe away if necessary
-M574 Z2 S2                                         ; Set endstops controlled by probe
-M558 P1 H5 F120 T6000                              ; Set Z probe type to unmodulated and the dive height + speeds
-G31 P500 X30.4 Y30.7 Z0.327                            ; Set Z probe trigger value, offset and trigger height
+
+M574 Z1 S2                                         ; Set endstops controlled by probe
+M307 H3 A-1 C-1 D-1                                ; Disable heater on PWM channel for BLTouch
+M558 P9 H15 F120 T6000                             ; Set Z probe type to bltouch and the dive height + speeds
+G31 P25 X-42 Y0 Z0                                 ; Set Z probe trigger value, offset and trigger height
 M557 X15:368 Y15:373 S20                           ; Define mesh grid
-
-M557 X0:340 Y35:380 S48 ; Define heightmap mesh
-M376 H25 ; Define height(mm) over which to taper off heightmap compensation
-
-G29 S1 ; Load heightmap after power cycle
-
-; --- SECTION: DRIVES (MOVEMENT SECTION) & ENDSTOPS ---
-
-M667 S1  ; Enable coreXY mode
-M569 P0 S0 ; Drive 0 goes forwards, CoreXY_1
-M569 P1 S1 ; Drive 1 goes forwards, CoreXY_2
-M569 P2 S1 ; Drive 2 goes backwards, Z Motor --- MODIFIED FOR MY SETUP!
-M569 P3 S0 ; Drive 3 goes forwards, Left Extruder
-M569 P4 S1 ; Drive 4 goes forwards, Right Extruder
-
-; Use this if you have an optical Z endstop
-;M574 X2 Y2 S0 ; Set xy end-stops types (S0 is active low, applied to XY)
-;M574 Z2 S1 ; Set z end-stops types (S1 is active high, applied to Z)
-
-; Use this if you have a mechanical XY endstop (and an IR Probe)
-M574 X2 Y2 S0 ; Set xy end-stops types (S0 is active low, applied to XY)
+M557 X0:340 Y35:380 S48                       ; Define heightmap mesh !!!!!
+M376 H25                                      ; Define height(mm) over which to taper off heightmap compensation !!!!!
 
 M906 X680 Y680 Z600 E350:350 I60; Set motor currents (mA) and idle current percentage
 
